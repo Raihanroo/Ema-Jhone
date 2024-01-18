@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Shop.css';
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
-import { addToDb, getShoppingCart } from '../../utilities/fakedb';
+import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fakedb';
 
 const Shop = () => {
     const [products, setproducts] = useState([]);
@@ -39,9 +39,15 @@ useEffect(() =>{
     const handleAddToCart = (product) =>{
         const newCart = [...cart, product];
 
-        
+
          setCart(newCart);
          addToDb(product.id)
+       }
+
+
+       const handleClearCart = () => {
+            setCart([]);
+            deleteShoppingCart();
        }
 
     return (
@@ -56,7 +62,10 @@ useEffect(() =>{
                  }
             </div>
             <div className="cart-container">
-               <Cart cart={[]}></Cart>
+               <Cart 
+                cart={cart}
+                handleClearCart={handleClearCart}
+                ></Cart>
             </div>
         </div>
     );
@@ -66,24 +75,4 @@ export default Shop;
 
 
 
- /*********The path Of **Hard Solution by following Cart.jsx */
-    
-         // if priduct doest exist in the cart , then set quantity = 1
-        // if exist update quantity by 1
-
-        /*let newCart = []/
-    
-        /**
-         * const exits = cart.find(pd => pd.id === product.id);
-         * if(!exists){
-         * product.quantity = 1;
-         * newCart = [...cart, product]
-         * 
-         * }
-         * else{
-         *   exists.quantity = exists.quantity + 1;
-         *   const remaining = cart.filter(pd => pd.id !== product.id);
-         *   newCart = [...remaining, exists]
-         * }
-         * 
-         * */
+ 
