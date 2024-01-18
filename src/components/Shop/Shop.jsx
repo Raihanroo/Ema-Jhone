@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import './Shop.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, } from "@fortawesome/free-solid-svg-icons";
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
 import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fakedb';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setproducts] = useState([]);
@@ -63,9 +66,16 @@ useEffect(() =>{
             </div>
             <div className="cart-container">
                <Cart 
-                cart={cart}
-                handleClearCart={handleClearCart}
-                ></Cart>
+                    cart={cart}
+                    handleClearCart={handleClearCart}
+                >
+                    <Link className='proced-link' to="/orders">
+                        <button className='btn-proced'>
+                            <span>Review Order</span>
+                            <FontAwesomeIcon  icon={faArrowRight} />
+                        </button>
+                    </Link>
+                </Cart>
             </div>
         </div>
     );
