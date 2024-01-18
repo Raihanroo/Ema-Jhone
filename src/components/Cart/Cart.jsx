@@ -18,7 +18,7 @@ const Cart = ({cart}) => {
      *   poduct .quantity = 1;
      * }
      */
-        product.quantity = product.quantity || 1;    /**short-cut solution */
+        product.quantity = product.quantity || 1;    /**short-cut solution*/
 
         totalPrice = totalPrice + product.price * product.quantity;
         totalShipping = totalShipping + product.shipping;
